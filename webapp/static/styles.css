@@ -1,0 +1,6 @@
+body { font-family: Arial, sans-serif; margin: 20px; }
+nav a { margin-right: 10px; }
+.flashes { list-style: none; padding: 0; }
+.flashes li { padding: 5px; margin-bottom: 5px; border: 1px solid #ccc; }
+.flashes li.error { background-color: #fdd; }
+.flashes li.info { background-color: #ddf; }

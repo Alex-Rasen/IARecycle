@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Nuevo Proveedor</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <p>{{ form.nombre.label }} {{ form.nombre() }}</p>
+    <p>{{ form.contacto.label }} {{ form.contacto() }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

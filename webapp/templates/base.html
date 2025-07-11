@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>IARecycla</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<nav>
+  {% if session.get('user') %}
+    <a href="{{ url_for('index') }}">Inicio</a> |
+    <a href="{{ url_for('phones_view') }}">Teléfonos</a> |
+    <a href="{{ url_for('components_view') }}">Componentes</a> |
+    <a href="{{ url_for('providers_view') }}">Proveedores</a> |
+    <a href="{{ url_for('orders_view') }}">Pedidos</a> |
+    <a href="{{ url_for('warehouse_view') }}">Bodega</a> |
+    <a href="{{ url_for('articles_view') }}">Artículos</a> |
+    <a href="{{ url_for('web_logout') }}">Salir</a>
+  {% endif %}
+</nav>
+<hr>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+</body>
+</html>

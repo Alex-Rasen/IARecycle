@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Nuevo Componente</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <p>{{ form.tipo.label }} {{ form.tipo() }}</p>
+    <p>{{ form.marca.label }} {{ form.marca() }}</p>
+    <p>{{ form.modelo.label }} {{ form.modelo() }}</p>
+    <p>{{ form.estado.label }} {{ form.estado() }}</p>
+    <p>{{ form.precio.label }} {{ form.precio() }}</p>
+    <p>{{ form.image_url.label }} {{ form.image_url() }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}
