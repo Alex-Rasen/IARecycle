@@ -55,6 +55,7 @@
         }
     </style>
 </head>
+
 <body>
     {% if session.get('user') %}
     <div id="sidebar" class="bg-dark gap-2">
@@ -141,10 +142,15 @@
 </script>
 
 <!-- PWA Block -->
-<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('/static/sw.js');</script>
+
 <script>let installBtn=document.getElementById('installBtn');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installBtn.style.display='block';installBtn.onclick=()=>e.prompt();});</script>
 
 
-
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/static/sw.js');
+}
+</script>
+<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
 </body>
 </html>
