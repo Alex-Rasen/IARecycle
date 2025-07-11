@@ -1,3 +1,4 @@
+
 import os
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session, flash
 import jwt
@@ -10,6 +11,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
             template_folder=os.path.join(BASE_DIR, 'templates'))
+
 app.config['SECRET_KEY'] = 'change_this_secret'
 
 USERS = {
@@ -33,8 +35,7 @@ USERS = {
 
 ALLOWED_ROLES = list(set(u['rol'] for u in USERS.values()))
 
-# Data persistence file
-DATA_FILE = os.path.join(BASE_DIR, 'data.json')
+
 
 telefonos = {}
 componentes = {}
@@ -43,6 +44,7 @@ pedidos = {}
 
 bodega = {}
 articulos = []
+
 
 def load_data():
     if os.path.exists(DATA_FILE):
@@ -71,6 +73,7 @@ def save_data():
 
 
 load_data()
+
 
 # Helpers
 
@@ -102,6 +105,7 @@ def require_auth(role=None):
             return fn(*args, **kwargs)
         return wrapper
     return decorator
+
 
 
 # ----- Flask-WTF Forms for web views -----
@@ -163,6 +167,7 @@ def login_required(view_func):
             return redirect(url_for('web_login'))
         return view_func(*args, **kwargs)
     return wrapped
+
 
 # --- Auth Endpoints ---
 @app.post('/login')
@@ -329,6 +334,7 @@ def add_article():
 @require_auth(role=ALLOWED_ROLES)
 def list_articles():
     return jsonify(articulos)
+
 
 
 # ------- Web Views -------
@@ -526,6 +532,7 @@ def article_new():
         flash('Artículo agregado', 'info')
         return redirect(url_for('articles_view'))
     return render_template('article_form.html', form=form)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
