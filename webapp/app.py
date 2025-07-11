@@ -10,6 +10,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'),
             template_folder=os.path.join(BASE_DIR, 'templates'))
+
 app.config['SECRET_KEY'] = 'change_this_secret'
 
 USERS = {
@@ -33,8 +34,10 @@ USERS = {
 
 ALLOWED_ROLES = list(set(u['rol'] for u in USERS.values()))
 
+
 # Data persistence file
 DATA_FILE = os.path.join(BASE_DIR, 'data.json')
+
 
 telefonos = {}
 componentes = {}
@@ -43,6 +46,9 @@ pedidos = {}
 
 bodega = {}
 articulos = []
+
+
+DATA_FILE = os.path.join(BASE_DIR, 'data.json')
 
 def load_data():
     if os.path.exists(DATA_FILE):
@@ -71,6 +77,7 @@ def save_data():
 
 
 load_data()
+
 
 # Helpers
 
@@ -102,6 +109,7 @@ def require_auth(role=None):
             return fn(*args, **kwargs)
         return wrapper
     return decorator
+
 
 
 # ----- Flask-WTF Forms for web views -----
@@ -166,6 +174,7 @@ def login_required(view_func):
 
 # --- Auth Endpoints ---
 @app.post('/api/login')
+
 def login():
     data = request.json
     email = data.get('email')
@@ -329,6 +338,7 @@ def add_article():
 @require_auth(role=ALLOWED_ROLES)
 def list_articles():
     return jsonify(articulos)
+
 
 
 # ------- Web Views -------
