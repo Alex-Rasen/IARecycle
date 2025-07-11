@@ -45,6 +45,7 @@ pedidos = {}
 bodega = {}
 articulos = []
 
+DATA_FILE = os.path.join(BASE_DIR, 'data.json')
 
 def load_data():
     if os.path.exists(DATA_FILE):
