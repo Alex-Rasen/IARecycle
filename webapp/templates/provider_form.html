@@ -1,10 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Nuevo Proveedor</h2>
-<form method="post">
-    {{ form.hidden_tag() }}
-    <p>{{ form.nombre.label }} {{ form.nombre() }}</p>
-    <p>{{ form.contacto.label }} {{ form.contacto() }}</p>
-    <p>{{ form.submit() }}</p>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="h4 mb-0">Nuevo Proveedor</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.nombre.label(class="form-label") }}
+                            {{ form.nombre(class="form-control") }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.contacto.label(class="form-label") }}
+                            {{ form.contacto(class="form-control") }}
+                        </div>
+                        <div class="d-grid">
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

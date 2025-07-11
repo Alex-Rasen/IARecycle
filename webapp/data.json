@@ -8,11 +8,26 @@
       "procesamiento": "Pendiente Desmantelamiento",
       "detalles_usuario": "prueba",
       "image_url": "https://image.made-in-china.com/2f0j00kcqVZaofZbRJ/Wholesale-Second-Hand-Phone-Original-Refurbished-Used-Mobile-Phones-for-Phone-13-PRO-13-PRO-Max.webp"
+    },
+    "TEL-0002": {
+      "id": "TEL-0002",
+      "fecha": "2025-07-11T06:12:24.893617",
+      "estado_inicial": "usado",
+      "origen": "lanzazo",
+      "procesamiento": "Pendiente Desmantelamiento",
+      "detalles_usuario": "me lo encontré ",
+      "image_url": ""
     }
   },
   "componentes": {},
   "proveedores": {},
   "pedidos": {},
   "bodega": {},
-  "articulos": []
+  "articulos": [
+    {
+      "titulo": "articulo de prueba",
+      "contenido": "probanding",
+      "fecha": "2025-07-11"
+    }
+  ]
 }

@@ -2,33 +2,149 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>IARecycla</title>
+    <link rel="manifest" href="/static/manifest.json">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        #sidebar {
+            min-width: 250px;
+            max-width: 250px;
+            min-height: 100vh;
+            transition: all 0.3s;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        #sidebar.collapsed {
+            left: -250px;
+        }
+        .sidebar-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+        }
+        .sidebar-link:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .main-content {
+            margin-left: 250px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .main-content.expanded {
+            margin-left: 0;
+        }
+        @media (max-width: 768px) {
+            #sidebar {
+                left: -250px;
+            }
+            #sidebar.show {
+                left: 0;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-<nav>
-  {% if session.get('user') %}
-    <a href="{{ url_for('index') }}">Inicio</a> |
-    <a href="{{ url_for('phones_view') }}">Teléfonos</a> |
-    <a href="{{ url_for('components_view') }}">Componentes</a> |
-    <a href="{{ url_for('providers_view') }}">Proveedores</a> |
-    <a href="{{ url_for('orders_view') }}">Pedidos</a> |
-    <a href="{{ url_for('warehouse_view') }}">Bodega</a> |
-    <a href="{{ url_for('articles_view') }}">Artículos</a> |
-    <a href="{{ url_for('web_logout') }}">Salir</a>
-  {% endif %}
-</nav>
-<hr>
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <ul class="flashes">
-    {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+    {% if session.get('user') %}
+    <div id="sidebar" class="bg-dark gap-2">
+        <div class="p-3">
+            <h3 class="text-white">IARecycla</h3>
+            <hr class="bg-light">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="sidebar-link" href="{{ url_for('index') }}">
+                        <i class="fas fa-home me-2"></i>Inicio
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="sidebar-link" href="{{ url_for('phones_view') }}">
+                        <i class="fas fa-mobile-alt me-2"></i>Teléfonos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="sidebar-link" href="{{ url_for('components_view') }}">
+                        <i class="fas fa-microchip me-2"></i>Componentes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="sidebar-link" href="{{ url_for('providers_view') }}">
+                        <i class="fas fa-truck me-2"></i>Proveedores
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="sidebar-link" href="{{ url_for('orders_view') }}">
+                        <i class="fas fa-shopping-cart me-2"></i>Pedidos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="sidebar-link" href="{{ url_for('warehouse_view') }}">
+                        <i class="fas fa-warehouse me-2"></i>Bodega
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="sidebar-link" href="{{ url_for('articles_view') }}">
+                        <i class="fas fa-box me-2"></i>Artículos
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a class="sidebar-link" id="installBtn" href="#">
+                        <i class="fas fa-download me-2"></i>Instalar App
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a class="sidebar-link" href="{{ url_for('web_logout') }}">
+                        <i class="fas fa-sign-out-alt me-2"></i>Salir
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
 
-{% block content %}{% endblock %}
+    <div class="main-content">
+        <button class="btn btn-dark d-md-none mb-3" id="sidebarCollapse" >
+            <i class="fas fa-bars"></i>
+        </button>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.getElementById('sidebarCollapse').addEventListener('click', function() {
+        document.getElementById('sidebar').classList.toggle('show');
+        document.querySelector('.main-content').classList.toggle('expanded');
+    });
+</script>
+
+<!-- PWA Block -->
+<script>if('serviceWorker'in navigator)navigator.serviceWorker.register('/static/sw.js');</script>
+<script>let installBtn=document.getElementById('installBtn');window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installBtn.style.display='block';installBtn.onclick=()=>e.prompt();});</script>
+
+
+
 </body>
 </html>

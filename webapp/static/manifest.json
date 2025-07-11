@@ -1,0 +1,20 @@
+{
+    "name": "MiApp",
+    "short_name": "App",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#000",
+    "icons": [
+        {
+            "src": "https://apex.oracle.com/pls/apex/r/apex_pm/49131/files/static/v413/icons/app-icon-512.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://apex.oracle.com/pls/apex/r/apex_pm/49131/files/static/v413/icons/app-icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

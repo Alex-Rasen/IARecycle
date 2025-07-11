@@ -1,13 +1,44 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Teléfonos</h2>
-<a href="{{ url_for('phone_new') }}">Registrar Teléfono</a>
-<table border="1">
-<tr><th>ID</th><th>Fecha</th><th>Estado</th><th>Origen</th><th>Procesamiento</th></tr>
-{% for t in phones %}
-<tr>
-<td>{{ t.id }}</td><td>{{ t.fecha }}</td><td>{{ t.estado_inicial }}</td><td>{{ t.origen }}</td><td>{{ t.procesamiento }}</td>
-</tr>
-{% endfor %}
-</table>
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="display-4">Teléfonos</h2>
+        </div>
+        <div class="col text-end">
+            <a href="{{ url_for('phone_new') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Registrar Teléfono
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Origen</th>
+                            <th scope="col">Procesamiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in phones %}
+                        <tr>
+                            <td>{{ t.id }}</td>
+                            <td>{{ t.fecha }}</td>
+                            <td>{{ t.estado_inicial }}</td>
+                            <td>{{ t.origen }}</td>
+                            <td>{{ t.procesamiento }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

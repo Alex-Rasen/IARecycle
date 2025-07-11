@@ -1,10 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Iniciar Sesión</h2>
-<form method="post">
-    {{ form.hidden_tag() }}
-    <p>{{ form.email.label }} {{ form.email(size=32) }}</p>
-    <p>{{ form.password.label }} {{ form.password(size=32) }}</p>
-    <p>{{ form.submit() }}</p>
-</form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
+                    <form method="post">
+                        {{ form.hidden_tag() }}
+                        <div class="mb-3">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control", size=32) }}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.password.label(class="form-label") }}
+                            {{ form.password(class="form-control", size=32) }}
+                        </div>
+                        <div class="d-grid gap-2">
+                            {{ form.submit(class="btn btn-primary btn-block") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

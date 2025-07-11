@@ -1,11 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Proveedores</h2>
-<a href="{{ url_for('provider_new') }}">Registrar Proveedor</a>
-<table border="1">
-<tr><th>ID</th><th>Nombre</th><th>Contacto</th></tr>
-{% for p in providers %}
-<tr><td>{{ p.id }}</td><td>{{ p.nombre }}</td><td>{{ p.contacto }}</td></tr>
-{% endfor %}
-</table>
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="display-4">Proveedores</h2>
+        </div>
+        <div class="col text-end">
+            <a href="{{ url_for('provider_new') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Registrar Proveedor
+            </a>
+        </div>
+    </div>
+
+       <div class="card shadow">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Contacto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in providers %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ p.contacto }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

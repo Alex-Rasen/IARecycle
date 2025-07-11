@@ -1,17 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Nuevo Pedido</h2>
-<form method="post">
-    {{ form.hidden_tag() }}
-    <p>{{ form.proveedor.label }} {{ form.proveedor() }}</p>
-    <p>{{ form.componentes_ids.label }} {{ form.componentes_ids(size=64) }}</p>
-    <p>{{ form.metodo_pago.label }} {{ form.metodo_pago() }}</p>
-    <p>{{ form.submit() }}</p>
-</form>
-<p>IDs disponibles:</p>
-<ul>
-{% for c in components.values() if c.disponible %}
-  <li>{{ c.id }} - {{ c.tipo }} {{ c.marca }}</li>
-{% endfor %}
-</ul>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h2 class="h4 mb-0">Nuevo Pedido</h2>
+        </div>
+        <div class="card-body">
+          <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+              <label class="form-label">{{ form.proveedor.label }}</label>
+              {{ form.proveedor(class="form-control") }}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">{{ form.componentes_ids.label }}</label>
+              {{ form.componentes_ids(class="form-control") }}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">{{ form.metodo_pago.label }}</label>
+              {{ form.metodo_pago(class="form-control") }}
+            </div>
+            <div class="d-grid">
+              {{ form.submit(class="btn btn-primary mb-4") }}
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

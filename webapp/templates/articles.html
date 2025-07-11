@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Artículos</h2>
-<a href="{{ url_for('article_new') }}">Nuevo Artículo</a>
-<ul>
-{% for a in articles %}
-<li><strong>{{ a.titulo }}</strong> ({{ a.fecha }})<br>{{ a.contenido }}</li>
-{% endfor %}
-</ul>
+<div class="container mt-5">
+    <div class="row mb-4">
+        <div class="col">
+            <h2 class="display-6">Artículos</h2>
+        </div>
+        <div class="col text-end">
+            <a href="{{ url_for('article_new') }}" class="btn btn-primary">
+                <i class="fas fa-plus-circle"></i> Nuevo Artículo
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="list-group">
+                {% for a in articles %}
+                <div class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ a.titulo }}</h5>
+                        <small class="text-muted">{{ a.fecha }}</small>
+                    </div>
+                    <p class="mb-1">{{ a.contenido }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
