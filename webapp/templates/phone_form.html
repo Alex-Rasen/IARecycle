@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Nuevo Teléfono</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <p>{{ form.estado_inicial.label }} {{ form.estado_inicial() }}</p>
+    <p>{{ form.origen.label }} {{ form.origen() }}</p>
+    <p>{{ form.detalles_usuario.label }} {{ form.detalles_usuario() }}</p>
+    <p>{{ form.image_url.label }} {{ form.image_url() }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

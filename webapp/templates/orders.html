@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Pedidos</h2>
+<a href="{{ url_for('order_new') }}">Nuevo Pedido</a>
+<table border="1">
+<tr><th>ID</th><th>Proveedor</th><th>Fecha</th><th>Total</th><th>Estado</th></tr>
+{% for o in orders %}
+<tr><td>{{ o.id }}</td><td>{{ o.proveedor }}</td><td>{{ o.fecha }}</td><td>{{ o.total }}</td><td>{{ o.estado }}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

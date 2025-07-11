@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Proveedores</h2>
+<a href="{{ url_for('provider_new') }}">Registrar Proveedor</a>
+<table border="1">
+<tr><th>ID</th><th>Nombre</th><th>Contacto</th></tr>
+{% for p in providers %}
+<tr><td>{{ p.id }}</td><td>{{ p.nombre }}</td><td>{{ p.contacto }}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}
