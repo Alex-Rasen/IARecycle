@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Bodega</h2>
+<a href="{{ url_for('warehouse_new') }}">Añadir Ítem</a>
+<ul>
+{% for k,v in items.items() %}
+<li>{{ k }}: {{ v }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

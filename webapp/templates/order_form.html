@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Nuevo Pedido</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <p>{{ form.proveedor.label }} {{ form.proveedor() }}</p>
+    <p>{{ form.componentes_ids.label }} {{ form.componentes_ids(size=64) }}</p>
+    <p>{{ form.metodo_pago.label }} {{ form.metodo_pago() }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+<p>IDs disponibles:</p>
+<ul>
+{% for c in components.values() if c.disponible %}
+  <li>{{ c.id }} - {{ c.tipo }} {{ c.marca }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

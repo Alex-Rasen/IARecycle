@@ -3,6 +3,7 @@ import jwt
 import datetime
 
 app = Flask(__name__)
+
 app.config['SECRET_KEY'] = 'change_this_secret'
 
 USERS = {
@@ -25,6 +26,7 @@ USERS = {
 }
 
 ALLOWED_ROLES = list(set(u['rol'] for u in USERS.values()))
+
 
 telefonos = {}
 componentes = {}
@@ -230,6 +232,7 @@ def add_article():
 @require_auth(role=ALLOWED_ROLES)
 def list_articles():
     return jsonify(articulos)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
