@@ -1,4 +1,3 @@
-
 import os
 from flask import Flask, request, jsonify, render_template, redirect, url_for, session, flash
 import jwt
@@ -36,6 +35,9 @@ USERS = {
 ALLOWED_ROLES = list(set(u['rol'] for u in USERS.values()))
 
 
+# Data persistence file
+DATA_FILE = os.path.join(BASE_DIR, 'data.json')
+
 
 telefonos = {}
 componentes = {}
@@ -44,6 +46,7 @@ pedidos = {}
 
 bodega = {}
 articulos = []
+
 
 DATA_FILE = os.path.join(BASE_DIR, 'data.json')
 
@@ -169,9 +172,9 @@ def login_required(view_func):
         return view_func(*args, **kwargs)
     return wrapped
 
-
 # --- Auth Endpoints ---
-@app.post('/login')
+@app.post('/api/login')
+
 def login():
     data = request.json
     email = data.get('email')
@@ -533,7 +536,6 @@ def article_new():
         flash('Artículo agregado', 'info')
         return redirect(url_for('articles_view'))
     return render_template('article_form.html', form=form)
-
 
 if __name__ == '__main__':
     app.run(debug=True)
