@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Artículos</h2>
+<a href="{{ url_for('article_new') }}">Nuevo Artículo</a>
+<ul>
+{% for a in articles %}
+<li><strong>{{ a.titulo }}</strong> ({{ a.fecha }})<br>{{ a.contenido }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

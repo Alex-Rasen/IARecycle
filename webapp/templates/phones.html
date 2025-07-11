@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Teléfonos</h2>
+<a href="{{ url_for('phone_new') }}">Registrar Teléfono</a>
+<table border="1">
+<tr><th>ID</th><th>Fecha</th><th>Estado</th><th>Origen</th><th>Procesamiento</th></tr>
+{% for t in phones %}
+<tr>
+<td>{{ t.id }}</td><td>{{ t.fecha }}</td><td>{{ t.estado_inicial }}</td><td>{{ t.origen }}</td><td>{{ t.procesamiento }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

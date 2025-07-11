@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Añadir a Bodega</h2>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <p>{{ form.item.label }} {{ form.item() }}</p>
+    <p>{{ form.qty.label }} {{ form.qty() }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}
