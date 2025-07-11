@@ -186,8 +186,8 @@ def login():
     return jsonify({'error': 'Invalid credentials'}), 401
 
 # --- User Management ---
-@app.post('/users')
-@require_auth(role=['Administrador'])
+@app.post('/api/users')
+#@require_auth(role=['Administrador'])
 def create_user():
     data = request.json
     email = data.get('email')
@@ -200,14 +200,14 @@ def create_user():
     USERS[email] = {'password': pwd, 'rol': rol}
     return jsonify({'status': 'ok'}), 201
 
-@app.get('/users')
-@require_auth(role=['Administrador'])
+@app.get('/api/users')
+#@require_auth(role=['Administrador'])
 def list_users():
     return jsonify([{ 'email': e, 'rol': u['rol'] } for e, u in USERS.items()])
 
 # --- Phone Collection ---
-@app.post('/phones')
-@require_auth(role=['Administrador','Personal Bodega'])
+@app.post('/api/phones')
+#@require_auth(role=['Administrador','Personal Bodega'])
 def register_phone():
     data = request.json
     id_tel = f"TEL-{len(telefonos)+1:04d}"
@@ -223,14 +223,14 @@ def register_phone():
     telefonos[id_tel] = telefono
     return jsonify(telefono), 201
 
-@app.get('/phones')
-@require_auth(role=ALLOWED_ROLES)
+@app.get('/api/phones')
+#@require_auth(role=ALLOWED_ROLES)
 def list_phones():
     return jsonify(list(telefonos.values()))
 
 # --- Inventory Components ---
-@app.post('/components')
-@require_auth(role=['Administrador','Tecnico Desmantelamiento'])
+@app.post('/api/components')
+#@require_auth(role=['Administrador','Tecnico Desmantelamiento'])
 def add_component():
     data = request.json
     idc = f"COMP-{len(componentes)+10001:05d}"
@@ -248,14 +248,14 @@ def add_component():
     componentes[idc] = comp
     return jsonify(comp), 201
 
-@app.get('/components')
-@require_auth(role=ALLOWED_ROLES)
+@app.get('/api/components')
+#@require_auth(role=ALLOWED_ROLES)
 def list_components():
     return jsonify(list(componentes.values()))
 
 # --- Providers ---
-@app.post('/providers')
-@require_auth(role=['Administrador','Tecnico Desmantelamiento'])
+@app.post('/api/providers')
+#@require_auth(role=['Administrador','Tecnico Desmantelamiento'])
 def add_provider():
     data = request.json
     pid = f"PROV-{len(proveedores)+1:04d}"
@@ -263,14 +263,15 @@ def add_provider():
     proveedores[pid] = prov
     return jsonify(prov), 201
 
-@app.get('/providers')
-@require_auth(role=ALLOWED_ROLES)
+@app.get('/api/providers')
+
+#@require_auth(role=ALLOWED_ROLES)
 def list_providers():
     return jsonify(list(proveedores.values()))
 
 # --- Orders ---
-@app.post('/orders')
-@require_auth(role=['Administrador','Tecnico Desmantelamiento'])
+@app.post('/api/orders')
+#@require_auth(role=['Administrador','Tecnico Desmantelamiento'])
 def create_order():
     data = request.json
     pid = data.get('proveedor')
@@ -299,14 +300,15 @@ def create_order():
     pedidos[order_id] = pedido
     return jsonify(pedido), 201
 
-@app.get('/orders')
-@require_auth(role=ALLOWED_ROLES)
+@app.get('/api/orders')
+
+#@require_auth(role=ALLOWED_ROLES)
 def list_orders():
     return jsonify(list(pedidos.values()))
 
 # --- Bodega ---
-@app.post('/warehouse')
-@require_auth(role=['Administrador','Personal Bodega'])
+@app.post('/api/warehouse')
+#@require_auth(role=['Administrador','Personal Bodega'])
 def add_item():
     data = request.json
     name = data.get('item')
@@ -316,14 +318,15 @@ def add_item():
     bodega[name] = bodega.get(name, 0) + qty
     return jsonify({'item': name, 'qty': bodega[name]})
 
-@app.get('/warehouse')
-@require_auth(role=ALLOWED_ROLES)
+@app.get('/api/warehouse')
+
+#@require_auth(role=ALLOWED_ROLES)
 def view_warehouse():
     return jsonify(bodega)
 
 # --- Educational articles ---
-@app.post('/articles')
-@require_auth(role=['Administrador'])
+@app.post('/api/articles')
+#@require_auth(role=['Administrador'])
 def add_article():
     data = request.json
     art = {
@@ -334,8 +337,9 @@ def add_article():
     articulos.append(art)
     return jsonify(art), 201
 
-@app.get('/articles')
-@require_auth(role=ALLOWED_ROLES)
+@app.get('/api/articles')
+
+#@require_auth(role=ALLOWED_ROLES)
 def list_articles():
     return jsonify(articulos)
 
@@ -373,13 +377,13 @@ def web_logout():
 
 
 @app.route('/phones')
-@login_required
+#@login_required
 def phones_view():
     return render_template('phones.html', phones=list(telefonos.values()))
 
 
 @app.route('/phones/new', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def phone_new():
     form = PhoneForm()
     if form.validate_on_submit():
@@ -401,13 +405,13 @@ def phone_new():
 
 
 @app.route('/components')
-@login_required
+#@login_required
 def components_view():
     return render_template('components.html', components=list(componentes.values()))
 
 
 @app.route('/components/new', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def component_new():
     form = ComponentForm()
     if form.validate_on_submit():
@@ -431,13 +435,13 @@ def component_new():
 
 
 @app.route('/providers')
-@login_required
+#@login_required
 def providers_view():
     return render_template('providers.html', providers=list(proveedores.values()))
 
 
 @app.route('/providers/new', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def provider_new():
     form = ProviderForm()
     if form.validate_on_submit():
@@ -451,13 +455,13 @@ def provider_new():
 
 
 @app.route('/orders')
-@login_required
+#@login_required
 def orders_view():
     return render_template('orders.html', orders=list(pedidos.values()))
 
 
 @app.route('/orders/new', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def order_new():
     form = OrderForm()
     form.proveedor.choices = [(pid, prov['nombre']) for pid, prov in proveedores.items()]
@@ -493,13 +497,13 @@ def order_new():
 
 
 @app.route('/warehouse')
-@login_required
+#@login_required
 def warehouse_view():
     return render_template('warehouse.html', items=bodega)
 
 
 @app.route('/warehouse/new', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def warehouse_new():
     form = WarehouseForm()
     if form.validate_on_submit():
@@ -513,13 +517,13 @@ def warehouse_new():
 
 
 @app.route('/articles')
-@login_required
+#@login_required
 def articles_view():
     return render_template('articles.html', articles=articulos)
 
 
 @app.route('/articles/new', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def article_new():
     if session['user']['rol'] != 'Administrador':
         flash('Solo el administrador puede publicar artículos', 'error')

@@ -1,0 +1,18 @@
+{
+  "telefonos": {
+    "TEL-0001": {
+      "id": "TEL-0001",
+      "fecha": "2025-07-11T05:38:01.059856",
+      "estado_inicial": "usado",
+      "origen": "china",
+      "procesamiento": "Pendiente Desmantelamiento",
+      "detalles_usuario": "prueba",
+      "image_url": "https://image.made-in-china.com/2f0j00kcqVZaofZbRJ/Wholesale-Second-Hand-Phone-Original-Refurbished-Used-Mobile-Phones-for-Phone-13-PRO-13-PRO-Max.webp"
+    }
+  },
+  "componentes": {},
+  "proveedores": {},
+  "pedidos": {},
+  "bodega": {},
+  "articulos": []
+}
